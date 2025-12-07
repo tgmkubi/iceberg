@@ -12,6 +12,12 @@ export class SuccessResponseInterceptor implements NestInterceptor {
         // Before controller execution
         const ctx = context.switchToHttp();
         const request = ctx.getRequest();
+        const url: string = request?.originalUrl || request?.url || "";
+
+        // Bypass wrapping for Swagger UI assets/responses
+        if (url.startsWith("/docs")) {
+            return next.handle();
+        }
 
         const path = request.url;
         const method = request.method;

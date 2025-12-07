@@ -1,14 +1,22 @@
 import mongoose from "mongoose";
 
+let isConnected = false;
+
 export async function connectDatabase(uri: string) {
+  if (isConnected) return;
+
   try {
-    await mongoose.connect(uri);
-    console.log("Connected to MongoDB Atlas");
+    const db = await mongoose.connect(uri, {
+      serverSelectionTimeoutMS: 3000,
+    });
+
+    isConnected = db.connection.readyState === 1;
+    console.log("MongoDB connected (cached state):", isConnected);
   } catch (err) {
-    console.error("Database connection error:", err);
-    throw err;
+    console.error("DB connection error:", err);
   }
 }
+
 
 export async function disconnectDatabase() {
   try {

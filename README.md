@@ -22,6 +22,7 @@ MONGO_URI=mongodb+srv://<user>:<pass>@<cluster>/<db>?retryWrites=true&w=majority
 PORT=3000                   # optional, defaults to 3000
 ```
 Uses MongoDB Atlas (required); no local Mongo accepted per task.
+Tip: For Vercel/Render set `MONGO_URI` in project env vars; connection fails fast in serverless (5s timeout) if wrong.
 
 ### Run
 ```bash

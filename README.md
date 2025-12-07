@@ -4,8 +4,8 @@ Backend service for managing agencies, agents, and transactions with automated c
 
 ## Live API URL
 - [https://iceberg-ochre.vercel.app/health](https://iceberg-ochre.vercel.app/health)
-- Swagger UI: `<baseUrl>/docs`  
-- OpenAPI JSON: `<baseUrl>/docs-json`  
+- Swagger UI (serverless build): `<baseUrl>/api-docs`
+- OpenAPI JSON: `<baseUrl>/api-docs-json`
 - Healthcheck: `<baseUrl>/health`
 
 ## Local Development
@@ -41,7 +41,7 @@ Tests use `mongodb-memory-server` with global setup/teardown; no real DB connect
 
 ## Endpoints (high level)
 - `GET /health` – liveness + DB state
-- `GET /docs` – Swagger UI
+- `GET /api-docs` – Swagger UI
 - Agents: CRUD under `/agents`
 - Agencies: CRUD under `/agencies`
 - Transactions: CRUD + stage updates under `/transactions/:id/stage`

@@ -15,7 +15,7 @@ export class SuccessResponseInterceptor implements NestInterceptor {
         const url: string = request?.originalUrl || request?.url || "";
 
         // Bypass wrapping for Swagger UI assets/responses
-        if (url.startsWith("/docs")) {
+        if (url.startsWith("/docs") || url.startsWith("/api-docs")) {
             return next.handle();
         }
 

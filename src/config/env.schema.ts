@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const EnvSchema = z.object({
-    MONGO_URI: z.url("MONGO_URI must be a valid MongoDB connection string"),
+    // Allow mongodb(+srv) URI patterns instead of strict URL validation
+    MONGO_URI: z.string().min(1, "MONGO_URI is required"),
     PORT: z.string().optional().default("3000"),
 });

@@ -67,6 +67,11 @@ async function bootstrap() {
             operationsSorter: "alpha",
         },
         customSiteTitle: "Iceberg API Docs",
+        customCssUrl: "https://unpkg.com/swagger-ui-dist@4/swagger-ui.css",
+        customJs: [
+            "https://unpkg.com/swagger-ui-dist@4/swagger-ui-bundle.js",
+            "https://unpkg.com/swagger-ui-dist@4/swagger-ui-standalone-preset.js",
+        ],
     });
 
     await app.init();

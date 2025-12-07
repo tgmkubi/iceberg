@@ -29,6 +29,11 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup("docs", app, document, {
     swaggerOptions: { persistAuthorization: true },
+    customCssUrl: "https://unpkg.com/swagger-ui-dist@4/swagger-ui.css",
+    customJs: [
+      "https://unpkg.com/swagger-ui-dist@4/swagger-ui-bundle.js",
+      "https://unpkg.com/swagger-ui-dist@4/swagger-ui-standalone-preset.js",
+    ],
   });
 
   process.on("SIGINT", async () => {

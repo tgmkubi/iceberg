@@ -3,7 +3,7 @@
 Backend service for managing agencies, agents, and transactions with automated commission calculation.
 
 ## Live API URL
-- [https://iceberg-azure.vercel.app/health](https://iceberg-ochre.vercel.app/health)
+- [https://iceberg-azure.vercel.app/health](https://iceberg-azure.vercel.app/health)
 - Swagger UI (serverless build): `<baseUrl>/api-docs`
 - OpenAPI JSON: `<baseUrl>/api-docs-json`
 - Healthcheck: `<baseUrl>/health`

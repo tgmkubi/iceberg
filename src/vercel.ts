@@ -60,7 +60,7 @@ async function bootstrap() {
         .build();
 
     const document = SwaggerModule.createDocument(app, config);
-    SwaggerModule.setup("api-docs", app, document, {
+    SwaggerModule.setup("docs", app, document, {
         swaggerOptions: {
             persistAuthorization: true,
             tagsSorter: "alpha",
@@ -78,7 +78,7 @@ async function bootstrap() {
     isAppInitialized = true;
 
     console.log("NestJS app initialized");
-    console.log("Swagger docs available at: /api-docs");
+    console.log("Swagger docs available at: /docs");
     return expressApp;
 }
 

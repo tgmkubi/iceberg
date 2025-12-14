@@ -1,5 +1,9 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query, UsePipes } from '@nestjs/common';
 import { TransactionsService } from './transactions.service';
+import { ApiBody } from "@nestjs/swagger";
+import { CreateTransactionSwaggerDto } from "./dto/swagger/create-transaction.swagger.dto";
+import { UpdateTransactionSwaggerDto } from "./dto/swagger/update-transaction.swagger.dto";
+import { UpdateTransactionStageSwaggerDto } from "./dto/swagger/update-transaction-stage.swagger.dto";
 import type { CreateTransactionDto } from './dto/create-transaction.dto';
 import type { UpdateTransactionDto } from './dto/update-transaction.dto';
 import type { UpdateStageDto } from "./dto/update-stage.dto";
@@ -19,6 +23,7 @@ export class TransactionsController {
   constructor(private readonly transactionsService: TransactionsService) { }
 
   @Post()
+  @ApiBody({ type: CreateTransactionSwaggerDto })
   @UsePipes(new ZodValidationPipe(CreateTransactionSchema))
   async create(@Body() dto: CreateTransactionDto) {
     const trx = await this.transactionsService.create(dto);
@@ -39,6 +44,7 @@ export class TransactionsController {
   }
 
   @Patch(":id")
+  @ApiBody({ type: UpdateTransactionSwaggerDto })
   @UsePipes(new ZodValidationPipe(UpdateTransactionSchema))
   async update(
     @Param("id") id: string,
@@ -49,6 +55,7 @@ export class TransactionsController {
   }
 
   @Patch(":id/stage")
+  @ApiBody({ type: UpdateTransactionStageSwaggerDto })
   @UsePipes(new ZodValidationPipe(UpdateStageSchema))
   async updateStage(
     @Param("id") id: string,

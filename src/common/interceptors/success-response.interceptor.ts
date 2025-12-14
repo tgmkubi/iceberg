@@ -17,6 +17,7 @@ export class SuccessResponseInterceptor implements NestInterceptor {
         // Bypass wrapping for Swagger UI + OpenAPI (UI assets and JSON)
         if (
             url.startsWith("/docs") ||
+            url.startsWith("/docs-json") ||
             url.startsWith("/api-docs") ||
             url.startsWith("/api-docs-json")
         ) {

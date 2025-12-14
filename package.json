@@ -1,10 +1,13 @@
 {
   "name": "iceberg",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "Backend service for managing agencies, agents, and transactions with automated commission calculation.",
+  "author": "Kubilay Uysal",
   "private": true,
   "license": "UNLICENSED",
+  "engines": {
+    "node": ">=24"
+  },
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",

@@ -9,7 +9,7 @@
   - `/agents`: CRUD.
   - `/agencies`: CRUD.
   - `/health`: liveness + DB state.
-  - `/api-docs` + `/api-docs-json`: Swagger UI / OpenAPI (serverless handler build).
+  - `/docs` + `/docs-json`: Swagger UI / OpenAPI (serverless handler build).
 - **Swagger**: Bootstrapped in `main.ts` and `src/vercel.ts` with `@nestjs/swagger` + `swagger-ui-express`; open for review.
 - **Validation**: Zod schemas via `ZodValidationPipe` per-route; global `ValidationPipe` for DTO coercion/whitelisting.
 
@@ -42,7 +42,7 @@
 
 ## Deployment Notes
 - Targeted for Vercel/Render/Railway; requires `MONGO_URI` (Atlas) at runtime.
-- Swagger/health live at `/api-docs`, `/api-docs-json`, `/health` on the deployed base URL (serverless build).
+- Swagger/health live at `/docs`, `/docs-json`, `/health` on the deployed base URL (serverless build).
 - CORS not configured explicitly (can be enabled in `main.ts` if needed for a front-end).
 
 ## Risks / Trade-offs

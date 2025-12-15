@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UsePipes, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { AgenciesService } from './agencies.service';
 import { ApiBody } from "@nestjs/swagger";
 import { CreateAgencySwaggerDto } from './dto/swagger/create-agency.swagger.dto';
@@ -20,15 +20,17 @@ export class AgenciesController {
 
   @Post()
   @ApiBody({ type: CreateAgencySwaggerDto })
-  @UsePipes(new ZodValidationPipe(CreateAgencySchema))
-  async create(@Body() dto: CreateAgencyDto) {
+  async create(
+    @Body(new ZodValidationPipe(CreateAgencySchema)) dto: CreateAgencyDto,
+  ) {
     const agency = await this.agenciesService.create(dto);
     return { message: "Agency created", data: AgencyResponseDto.from(agency) };
   }
 
   @Get()
-  @UsePipes(new ZodValidationPipe(QueryAgenciesSchema))
-  async findAll(@Query() query: QueryAgenciesDto) {
+  async findAll(
+    @Query(new ZodValidationPipe(QueryAgenciesSchema)) query: QueryAgenciesDto,
+  ) {
     const agencies = await this.agenciesService.findAll(query);
     return { data: agencies.items.map(AgencyResponseDto.from), meta: agencies.meta };
   }
@@ -41,8 +43,10 @@ export class AgenciesController {
 
   @Patch(':id')
   @ApiBody({ type: UpdateAgencySwaggerDto })
-  @UsePipes(new ZodValidationPipe(UpdateAgencySchema))
-  async update(@Param('id') id: string, @Body() dto: UpdateAgencyDto) {
+  async update(
+    @Param('id') id: string,
+    @Body(new ZodValidationPipe(UpdateAgencySchema)) dto: UpdateAgencyDto,
+  ) {
     const updated = await this.agenciesService.update(id, dto);
     return { message: "Agency updated", data: AgencyResponseDto.from(updated) };
   }

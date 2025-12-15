@@ -12,6 +12,7 @@ export class TransactionResponseDto {
   propertyId: string;
   totalServiceFee: number;
   stage: string;
+  stageLogs?: { stage: string; timestamp: Date }[];
 
   listingAgent: AgentMiniDto | null;
   sellingAgent: AgentMiniDto | null;
@@ -28,6 +29,10 @@ export class TransactionResponseDto {
     dto.propertyId = trx.propertyId;
     dto.totalServiceFee = trx.totalServiceFee;
     dto.stage = trx.stage;
+    dto.stageLogs = trx.stageLogs?.map((log) => ({
+      stage: log.stage,
+      timestamp: log.timestamp,
+    }));
 
     dto.listingAgent = isPopulatedAgent(trx.listingAgentId)
       ? AgentMiniDto.from(trx.listingAgentId)

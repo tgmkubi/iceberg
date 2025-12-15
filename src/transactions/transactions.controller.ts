@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query, UsePipes } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { TransactionsService } from './transactions.service';
 import { ApiBody } from "@nestjs/swagger";
 import { CreateTransactionSwaggerDto } from "./dto/swagger/create-transaction.swagger.dto";
@@ -24,15 +24,17 @@ export class TransactionsController {
 
   @Post()
   @ApiBody({ type: CreateTransactionSwaggerDto })
-  @UsePipes(new ZodValidationPipe(CreateTransactionSchema))
-  async create(@Body() dto: CreateTransactionDto) {
+  async create(
+    @Body(new ZodValidationPipe(CreateTransactionSchema)) dto: CreateTransactionDto,
+  ) {
     const trx = await this.transactionsService.create(dto);
     return { message: "Transaction created successfully", data: TransactionResponseDto.from(trx) };
   }
 
   @Get()
-  @UsePipes(new ZodValidationPipe(QueryTransactionsSchema))
-  async findAll(@Query() query: QueryTransactionsDto) {
+  async findAll(
+    @Query(new ZodValidationPipe(QueryTransactionsSchema)) query: QueryTransactionsDto,
+  ) {
     const list = await this.transactionsService.findAll(query);
     return { data: list.items.map(TransactionResponseDto.from), meta: list.meta };
   }
@@ -45,10 +47,9 @@ export class TransactionsController {
 
   @Patch(":id")
   @ApiBody({ type: UpdateTransactionSwaggerDto })
-  @UsePipes(new ZodValidationPipe(UpdateTransactionSchema))
   async update(
     @Param("id") id: string,
-    @Body() dto: UpdateTransactionDto
+    @Body(new ZodValidationPipe(UpdateTransactionSchema)) dto: UpdateTransactionDto
   ) {
     const trx = await this.transactionsService.update(id, dto);
     return { message: "Transaction updated", data: TransactionResponseDto.from(trx) };
@@ -56,10 +57,9 @@ export class TransactionsController {
 
   @Patch(":id/stage")
   @ApiBody({ type: UpdateTransactionStageSwaggerDto })
-  @UsePipes(new ZodValidationPipe(UpdateStageSchema))
   async updateStage(
     @Param("id") id: string,
-    @Body() body: UpdateStageDto,
+    @Body(new ZodValidationPipe(UpdateStageSchema)) body: UpdateStageDto,
   ) {
     const trx = await this.transactionsService.updateStage(id, body.stage);
     return { message: "Transaction stage updated", data: TransactionResponseDto.from(trx) };
